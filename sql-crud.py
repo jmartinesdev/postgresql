@@ -1,7 +1,7 @@
 from sqlalchemy import (
     create_engine, Column, Integer, String
 )
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
@@ -19,8 +19,6 @@ class Programmer(base):
     gender = Column(String)
     nationality = Column(String)
     famous_for = Column(String)
-
-    
 
 # instead of connecting to the database directly, we will ask for a session
 # create a new instance of sessionmaker, then point to our engine (the db)
@@ -80,17 +78,75 @@ tim_berners_lee = Programmer(
     nationality="British",
     famous_for="World Wide Web"
 )
+jakeline_martines = Programmer(
+    first_name="Jakeline",
+    last_name="Martines",
+    gender="F",
+    nationality="Brazilian",
+    famous_for="Brazilian Programmer"
+)
+
 # Add each instance of our programmers to our session
-#session.add(ada_lovelace)
-session.add(alan_turing)
-session.add(gracer_hopper)
-session.add(margaret_hamilton)
-session.add(bill_gates)
-session.add(tim_berners_lee)
+# session.add(ada_lovelace)
+# session.add(alan_turing)
+# session.add(gracer_hopper)
+# session.add(margaret_hamilton)
+# session.add(bill_gates)
+# session.add(tim_berners_lee)
+# session.add(jakeline_martines)
 
 # commit our session to the database
 # muito similiar quando damos o commit no terminal para o GitHub
-session.commit()
+# session.commit()
+
+
+# updating a single record
+
+#programmer = session.query(Programmer).filter_by(id=12).first()
+#programmer.famous_for = "World President"
+
+# programmer = session.query(Programmer).filter_by(id=37).first()
+# programmer.id = 7
+
+# commit our session to the database
+#session.commit()
+
+# Updating multiple records 
+#people = session.query(Programmer)
+#for person in people:
+#    if person.gender == "F":
+#        person.gender = "Female"
+#    elif person.gender == "M":
+#        person.gender = "Male"
+#    else: 
+#        print("Gender not defined")
+#    session.commit()
+
+# deleting a single record 
+#fname = input('Enter first name: ') #fname armazena o nome que o usuario inserir
+# lname = input('Enter last name: ')
+# programmer = session.query(Programmer).filter_by(first_name=fname, last_name=lname).first()
+# session.query percorre pelos dados dos programadores e filtra o primeiro nome que esta na tabela se é igual ao nome guardado na variavel fname e first da o resultado da consulta.
+# defensive programming
+
+# ids_delete = [17, 28, 29, 30, 31, 32, 33, 7, 12]
+
+# for id_delete in ids_delete:
+#     programmer = session.query(Programmer).filter(Programmer.id == id_delete).first()
+    
+#     if programmer is not None:
+#         print("Programmer found: ", programmer.id)
+#         confirmation = input("Are you sure you want delete this record? (y/n)")
+#         if confirmation.lower() == "y":
+#             session.delete(programmer)
+#             session.commit()
+#             print("Programmer has been deleted")
+#         else:
+#             print("Programmer not deleted")
+#     else:
+#         print("Not record found")
+
+
 
 # query the database to find all programmers
 programmers = session.query(Programmer)
