@@ -112,15 +112,13 @@ jakeline_martines = Programmer(
 #session.commit()
 
 # Updating multiple records 
-#people = session.query(Programmer)
-#for person in people:
-#    if person.gender == "F":
-#        person.gender = "Female"
-#    elif person.gender == "M":
-#        person.gender = "Male"
-#    else: 
-#        print("Gender not defined")
-#    session.commit()
+people = session.query(Programmer)
+for person in people:
+   if person.gender == "F":
+       person.gender = "Female"
+   elif person.gender == "M":
+       person.gender = "Male"
+session.commit()
 
 # deleting a single record 
 #fname = input('Enter first name: ') #fname armazena o nome que o usuario inserir
